@@ -1,0 +1,53 @@
+
+use RecordsDB; // Switch to (or create) a database named "RecordsDB"
+
+
+// Insert a single document using insertOne()
+db.Records.insertOne({
+    name: "Alice",
+    age: 25,
+    city: "New York"
+});
+
+// Insert multiple documents using insertMany()
+db.Records.insertMany([
+    { name: "Bob", age: 30, city: "Chicago" },
+    { name: "Charlie", age: 35, city: "Los Angeles" },
+    { name: "Diana", age: 28, city: "San Francisco" }
+]);
+
+
+// Find all documents in the collection
+db.Records.find(); 
+
+// Find documents with specific criteria (e.g., age > 28)
+db.Records.find({ age: { $gt: 28 } });
+
+// Find a single document with a specific field value
+db.Records.findOne({ name: "Alice" });
+
+
+// Update a single document using updateOne()
+db.Records.updateOne(
+    { name: "Bob" },           // Filter
+    { $set: { city: "Miami" }} // Update action
+);
+
+// Update multiple documents using updateMany()
+db.Records.updateMany(
+    { age: { $gt: 28 } },       // Filter
+    { $set: { status: "Senior" }} // Update action
+);
+
+// Replace a document entirely using replaceOne()
+db.Records.replaceOne(
+    { name: "Charlie" },        // Filter
+    { name: "Charlie", age: 36, city: "Las Vegas", status: "Updated" } // Replacement
+);
+
+
+// Delete a single document using deleteOne()
+db.Records.deleteOne({ name: "Alice" });
+
+// Delete multiple documents using deleteMany()
+db.Records.deleteMany({ status: "Senior" });
